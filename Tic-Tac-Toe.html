@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta content="en-us" http-equiv="Content-Language" />
+        <title>Tic-Tac-Toe</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+        />
+        <link rel="stylesheet" type="text/css" href="Tic-Tac-Toe.css" />
+        <link rel="stylesheet" href="lib/jquery-ui.css" />
+        <script type="text/javascript" src="lib/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="lib/jquery-ui.js"></script>
+        <script type="text/javascript" src="Tic-Tac-Toe.js"></script>
+    </head>
+    
+    <body onselectstart="return false">
+        	<h1>Tic-Tac-Toe</h1>
+
+        <table align="center" cellpadding="0" cellspacing="0" style="width: 950px; height: 324px;">
+            <tr>
+                <td style="width: 315px" rowspan="2">&nbsp;</td>
+                <td style="width: 315px; height: 50px;">
+                    	<h3 id="XorO">X's Turn</h3>
+
+                </td>
+                <td style="width: 25px; height: 50px;" rowspan="2"></td>
+                <td style="height: 60px" rowspan="2"></td>
+            </tr>
+            <tr>
+                <td style="width: 315px; height: 25px;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="width: 315px">&nbsp;</td>
+                <td style="width: 315px">
+                    <canvas id="canvas0" height="100px" width="100px"></canvas>
+                    <canvas id="canvas1" height="100px" width="100px"></canvas>
+                    <canvas id="canvas2" height="100px" width="100px"></canvas>
+                    <br />
+                    <canvas id="canvas3" height="100px" width="100px"></canvas>
+                    <canvas id="canvas4" height="100px" width="100px"></canvas>
+                    <canvas id="canvas5" height="100px" width="100px"></canvas>
+                    <br />
+                    <canvas id="canvas6" height="100px" width="100px"></canvas>
+                    <canvas id="canvas7" height="100px" width="100px"></canvas>
+                    <canvas id="canvas8" height="100px" width="100px"></canvas>
+                </td>
+                <td style="width: 25px">&nbsp;</td>
+                <td>
+                    <table cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+                        <tr>
+                            <td style="height: 81px">
+                                	<h4 id="xWinCount">X wins: 0</h4>
+
+                                	<h4 id="oWinCount">O wins: 0</h4>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 81px">
+                                	<h3 id="status">Choose an opponent</h3>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 81px">
+                                <button id="newGame" style="width: 86px">New Game</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 81px">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <table style="width: 641px">
+            <tr>
+                <td>
+                    <br />
+                    <form>
+                        <div id="radio">
+                            <input type="radio" id="radio1" name="opponent" />
+                            <label for="radio1">A friend<sup>&nbsp;</sup>
+
+                            </label>
+                            <input type="radio" id="radio2" name="opponent" />
+                            <label for="radio2">AI Computer<sup>&nbsp;</sup>
+
+                            </label>
+                            <input type="radio" id="radio3" name="opponent" />
+                            <label for="radio3">Unbeatable AI<sup>new</sup>
+
+                            </label>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </body>
+
+</html>
