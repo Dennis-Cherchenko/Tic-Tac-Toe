@@ -24,18 +24,24 @@
     });
 
     //Some Global Variables
-    var turn = 1;
-    var originalTurn = 1;
-    var firstCanvasClicked;
-    var drawn;
-    var squaresFilled = 0;
-    var winners = false;
-    var xWinCountFriend = 0;
-    var xWinCountAI = 0;
-    var xWinCountUnbeatableAI = 0;
-    var oWinCountFriend = 0;
-    var oWinCountAI = 0;
-    var oWinCountUnbeatableAI = 0;
+    game = {
+    	drawnNum: 0,
+    	firstCanvasClicked: null,
+    	originalTurn: 1,
+    	squaresFilled: 0,
+    	turn: 1,
+    	winners: false,
+    }
+    x = {
+    	winCountFriend: 0,
+    	winCountAI: 0,
+    	winCountUnbeatableAI: 0,
+    }
+	o = {
+		winCountFriend: 0,
+    	winCountAI: 0,
+    	winCountUnbeatableAI: 0,
+	}    
 
     //creates an array for all nine boxes
     canvas = new Array();
@@ -47,21 +53,21 @@
 
     //Function when a square on the grid is clicked
     function clicked(canvasNumber) {
-        if (winners === false) {
+        if (game.winners === false) {
             if (option === 1 || option === 2 || option === 3) {
                 $('#status').text("");
-                if (turn % 2 === 0) {
+                if (game.turn % 2 === 0) {
                     $("#XorO").html("X's Turn");
                 } else {
                     $("#XorO").html("O's Turn");
                 }
-                if (turn === 1) {
-                    firstCanvasClicked = canvasNumber;
+                if (game.turn === 1) {
+                    game.firstCanvasClicked = canvasNumber;
                 }
                 if (canvas[canvasNumber] === "X" || canvas[canvasNumber] === "O") {
                     alert('This square is already taken! Choose another :)');
                 } else if (option === 1) {
-                    var playerTurn = turn % 2;
+                    var playerTurn = game.turn % 2;
                     if (playerTurn === 1) {
                         draw(canvasNumber, "X");
                         checkForWinnersAndDraws("X");
@@ -75,8 +81,8 @@
                     computerTurn();
                     checkForWinnersAndDraws("O");
                 }
-                turn++;
-                squaresFilled++;
+                game.turn++;
+                game.squaresFilled++;
             }
         }
     }
@@ -97,7 +103,7 @@
             c.stroke();
             c.closePath();
             canvas[canvasNumber] = "O";
-            drawn = 1;
+            game.drawnNum = 1;
         }
     }
 
@@ -105,7 +111,7 @@
         checkTwo("O");
         checkForWinnersAndDraws("O");
         checkTwo("X");
-        if (firstCanvasClicked === 4) {
+        if (game.firstCanvasClicked === 4) {
             if (canvas[2] === "X") {
                 if (canvas[3] === "X") {
                     draw(5, "O");
@@ -115,7 +121,7 @@
             } else {
                 draw(6, "O");
             }
-        } else if (firstCanvasClicked === 0 || firstCanvasClicked === 2 || firstCanvasClicked === 6 || firstCanvasClicked === 8) {
+        } else if (game.firstCanvasClicked === 0 || game.firstCanvasClicked === 2 || game.firstCanvasClicked === 6 || game.firstCanvasClicked === 8) {
             if (canvas[0] === "X") {
                 draw(6, "O");
             } else {
@@ -153,46 +159,45 @@
 
     function checkForWinnersAndDraws(XorO) {
         for (i = 0; i < 8; i++) {
-            if ((canvas[win[i].charAt(0)] === XorO) && (canvas[win[i].charAt(1)] === XorO) && (canvas[win[i].charAt(2)] === XorO)) {
-                winners = true;
+            if ((canvas[win[i].charAt(0)] === XorO) && (canvas[win[i].charAt(1)] === XorO) && (canvas[win[i].charAt(2)] === XorO) && game.winners !== true) {
+                game.winners = true;
                 $('#status').text(XorO + " wins! Start a new game?");
                 if (option === 1) {
                     if (XorO === "X") {
-                        xWinCountFriend++;
-                        $('#xWinCount').text("X wins: " + xWinCountFriend);
+                        x.winCountFriend++;
+                        $('#xWinCount').text("X wins: " + x.winCountFriend);
                     } else {
-                        oWinCountFriend++;
-                        $('#oWinCount').text("O wins: " + oWinCountFriend);
+                        o.winCountFriend++;
+                        $('#oWinCount').text("O wins: " + o.winCountFriend);
                     }
                 } else if (option === 2) {
                     if (XorO === "X") {
-                        xWinCountFriend++;
-                        $('#xWinCount').text("X wins: " + xWinCountAI);
+                        x.winCountFriend++;
+                        $('#xWinCount').text("X wins: " + x.winCountAI);
                     }
                 } else {
-                    oWinCountFriend++;
-                    $('#oWinCount').text("O wins: " + oWinCountAI);
+                    o.winCountFriend++;
+                    $('#oWinCount').text("O wins: " + o.winCountAI);
                 }
             }
         }
-        if (squaresFilled === 8 && winners === false) {
+        if (game.squaresFilled === 8 && game.winners === false) {
             $('#status').text("It's a draw! Start a new game?");
         }
     }
 
     function newGame() {
         $('#status').text("Continue with current or choose a new opponent.");
-        originalTurn++;
-        if (originalTurn % 2 === 0) {
-            turn = 2;
+        game.originalTurn++;
+        if (game.originalTurn % 2 === 0) {
+            game.turn = 2;
         } else {
-            turn = 1;
+            game.turn = 1;
         }
-        canvasFirstClicked = null;
-        drawn = null;
-        squaresFilled = 0;
-        winners = false;
-        initialize = null;
+        game.canvasFirstClicked = null;
+        game.drawnNum = 0;
+        game.squaresFilled = 0;
+        game.winners = false;
         for (i = 0; i < 9; i++) {
             canvas[i] = i;
             var canvasT = "canvas" + i;
